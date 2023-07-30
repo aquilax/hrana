@@ -5,13 +5,13 @@ import hran.meta;
 
 struct Item
 {
-    string name;
-    float value;
+	string name;
+	float value;
 }
 
 struct Day
 {
-    DateTime dateTime;
-    Item[] items;
-    MetaPair[] meta;
+	DateTime dateTime;
+	Item[] items;
+	MetaPair[] meta;
 }
