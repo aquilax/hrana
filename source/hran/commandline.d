@@ -23,6 +23,21 @@ void dbg()
     ];
     Record[] db = [
         {
+            name: "soup/potato/100g",
+            ingredients: [
+                Ingredient("soup/potato/meal", 0.01),
+            ],
+            meta: [],
+        },
+        {
+            name: "soup/potato/meal",
+            ingredients: [
+                Ingredient("vegetables/potato/100g", 3),
+                Ingredient("oil/sunflower/100g", 0.30),
+            ],
+            meta: [],
+        },
+        {
             name: "vegetables/potato/100g",
             ingredients: [
                 Ingredient("kcal", 77),
