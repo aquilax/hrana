@@ -1,6 +1,6 @@
 module hran.journal;
 
-import std.datetime.date : DateTime;
+import std.datetime.date : Date;
 import hran.meta;
 import hran.database;
 import std.algorithm;
@@ -15,7 +15,7 @@ struct Item
 
 struct Day
 {
-	DateTime dateTime;
+	Date date;
 	Item[] items;
 	MetaPair[] meta;
 }
@@ -35,7 +35,7 @@ Day resolveDay(Record[] db, Day day)
 	auto i = joiner(day.items.map!(getItems)).array;
 
 	Day d = {
-		dateTime: day.dateTime,
+		date: day.date,
 		meta: day.meta,
 		items: reduceItems(i),
 	};

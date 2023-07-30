@@ -5,7 +5,7 @@ import hran.journal;
 import hran.database;
 import hran.meta;
 import std.stdio;
-import std.datetime.date : DateTime;
+import std.datetime;
 
 
 int commandReg(Config c)
@@ -16,11 +16,21 @@ int commandReg(Config c)
 	foreach (day; journal)
 	{
 		auto rday = resolveDay(rdb, day);
-		writeln(rday);
+		printDay(rday);
 	}
 	return 0;
 }
 
+
+void printDay(Day d)
+{
+	writefln("%s:",  d.date.toISOExtString);
+	foreach(item; d.items)
+	{
+		writefln("\t%s: %.2f", item.name, item.value);
+	}
+	writeln("");
+}
 
 auto getDb()
 {
@@ -58,7 +68,7 @@ auto getJournal()
 {
 	Day[] journal = [
 		{
-			dateTime: DateTime(2018, 1, 1, 12, 30, 10),
+			date: Date(2018, 1, 1),
 			items: [Item("vegetables/potato/100g", 2.00)],
 			meta: [MetaPair("version", "v1")]
 		}
