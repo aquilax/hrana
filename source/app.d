@@ -1,6 +1,8 @@
-import std.stdio;
+module app;
 
-void main()
+import hran.commandline: runCommandLine;
+
+int main(string[] args)
 {
-	writeln("Edit source/app.d to start your project.");
+	return runCommandLine(args);
 }

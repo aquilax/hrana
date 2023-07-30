@@ -2,13 +2,7 @@
 docs.json
 __dummy.html
 docs/
-/hrana
-hrana.so
-hrana.dylib
-hrana.dll
-hrana.a
-hrana.lib
-hrana-test-*
+bin/*
 *.exe
 *.o
 *.obj
