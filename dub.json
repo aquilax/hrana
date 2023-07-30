@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"aquilax"
+	],
+	"copyright": "Copyright © 2023, aquilax",
+	"description": "A POC nutrition tracker in D",
+	"license": "MIT",
+	"name": "hrana"
+}
