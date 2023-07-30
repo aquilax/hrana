@@ -3,6 +3,9 @@
 		"aquilax"
 	],
 	"copyright": "Copyright © 2023, aquilax",
+	"dependencies": {
+		"commandr": "~>0.2.0"
+	},
 	"description": "A POC nutrition tracker in D",
 	"license": "MIT",
 	"name": "hrana",

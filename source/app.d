@@ -1,6 +1,7 @@
 module app;
 
-import hran.commandline: runCommandLine;
+import cmd.commandline;
+import std.stdio;
 
 int main(string[] args)
 {

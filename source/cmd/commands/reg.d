@@ -1,26 +1,29 @@
-module hran.commandline;
+module cmd.commands.reg;
 
-import std.stdio;
+import cmd.config;
 import hran.journal;
 import hran.database;
 import hran.meta;
+import std.stdio;
 import std.datetime.date : DateTime;
 
-int runCommandLine(string[] args)
+
+int commandReg(Config c)
 {
-	dbg();
+	auto db = getDb();
+	auto rdb = resolveDatabase(db);
+	auto journal = getJournal();
+	foreach (day; journal)
+	{
+		auto rday = resolveDay(rdb, day);
+		writeln(rday);
+	}
 	return 0;
 }
 
-void dbg()
+
+auto getDb()
 {
-	Day[] journal = [
-		{
-			dateTime: DateTime(2018, 1, 1, 12, 30, 10),
-			items: [Item("vegetables/potato/100g", 2.00)],
-			meta: [MetaPair("version", "v1")]
-		}
-	];
 	Record[] db = [
 		{
 			name: "soup/potato/100g",
@@ -48,8 +51,17 @@ void dbg()
 			meta: [MetaPair("version", "v1")]
 		}
 	];
+	return db;
+}
 
-	writeln(journal);
-	writeln(db);
-	writeln(resolveDatabase(db));
+auto getJournal()
+{
+	Day[] journal = [
+		{
+			dateTime: DateTime(2018, 1, 1, 12, 30, 10),
+			items: [Item("vegetables/potato/100g", 2.00)],
+			meta: [MetaPair("version", "v1")]
+		}
+	];
+	return journal;
 }

@@ -6,6 +6,7 @@ import std.algorithm;
 import std.array;
 import std.range;
 import hran.meta;
+import hran.utils;
 
 enum MaxDepth = 10;
 
@@ -47,34 +48,9 @@ Record resolveRecord(Record r, Record[] db,  int depth) {
 	Record ret = {
 		name: r.name,
 		meta: r.meta,
-		ingredients: reduceIngredients(i)
+		ingredients: reduceItems(i)
 	};
 	return ret;
-}
-
-Ingredient[] reduceIngredients(Ingredient[] input)
-{
-	string[] names;
-	float[string] floatSum;
-
-	foreach (i; input)
-	{
-		if ((i.name in floatSum) is null)
-		{
-			floatSum[i.name] = i.value;
-			names ~= i.name;
-		}
-		else
-			floatSum[i.name] += i.value;
-	}
-
-	Ingredient[] result;
-	foreach (name; names)
-	{
-		result ~= Ingredient(name, floatSum[name]);
-	}
-
-	return result;
 }
 
 ///
@@ -126,7 +102,8 @@ unittest {
 				Ingredient("fat", 0.3),
 				Ingredient("carbs", 51),
 				Ingredient("protein", 6),
-				Ingredient("oil/sunflower/100g", 0.3)],
+				Ingredient("oil/sunflower/100g", 0.3)
+			],
 			meta: [],
 		},
 		{
