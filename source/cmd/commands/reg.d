@@ -5,6 +5,7 @@ import hran.journal;
 import hran.database;
 import hran.meta;
 import hran.parser;
+import hran.utils;
 import std.stdio;
 import std.datetime;
 import std.algorithm;
@@ -19,7 +20,7 @@ int commandReg(Config c)
 	//auto journal = getJournal(, );
 	parseFileName(journalFileName, (ParsedNode pn) {
 		Day day = {
-			date: Date(2018, 1, 1),
+			date: parseDate(pn.header),
 			items: pn.items.map!(pni => Item(pni.name, pni.value)).array,
 			meta: pn.meta,
 		};
@@ -32,7 +33,7 @@ int commandReg(Config c)
 
 void printDay(Day d)
 {
-	writefln("%s:",  d.date.toISOExtString);
+	writefln("%s:",  formatDate(d.date));
 	foreach(item; d.items)
 	{
 		writefln("\t%s: %.2f", item.name, item.value);

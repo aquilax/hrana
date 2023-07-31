@@ -45,7 +45,7 @@ void parseFile(File file, bool delegate(ParsedNode pn) callback) {
 				bool stop = callback(node);
 				if (stop) return;
 			}
-			node = ParsedNode(trimmedLine);
+			node = ParsedNode(trimmedLine.stripRight(": \t"));
 			continue;
 		}
 
