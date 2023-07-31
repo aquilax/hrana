@@ -1,6 +1,6 @@
 module hran.utils;
 
-T[] reduceItems(T)(T[] input)
+T[] reduceItems(T)(T[] input) pure nothrow
 {
 	string[] names;
 	float[string] floatSum;

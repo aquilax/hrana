@@ -20,8 +20,7 @@ struct Day
 	MetaPair[] meta;
 }
 
-
-Day resolveDay(Record[] db, Day day)
+Day resolveDay(Record[] db, Day day) pure nothrow
 {
 	auto getItems = (Item i)
 	{

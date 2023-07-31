@@ -23,12 +23,13 @@ struct Record
 	MetaPair[] meta;
 }
 
-Record[] resolveDatabase(Record[] db)
+Record[] resolveDatabase(Record[] db) nothrow
 {
 	return map!(r => resolveRecord(r, db, MaxDepth))(db).array;
 }
 
-Record resolveRecord(Record r, Record[] db,  int depth) {
+Record resolveRecord(Record r, Record[] db,  int depth) nothrow
+{
 	if (depth == 0) {
 		return r;
 	}
