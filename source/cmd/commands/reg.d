@@ -14,11 +14,9 @@ import hran.utils;
 
 int commandReg(Config c)
 {
-	auto db = getDb("./examples/food.yaml");
+	auto db = getDb(c.databaseFileName);
 	auto rdb = resolveDatabase(db);
-	string journalFileName = "./examples/log.yaml";
-	//auto journal = getJournal(, );
-	parseFileName(journalFileName, (ParsedNode pn) {
+	parseFileName(c.journalFileName, (ParsedNode pn) {
 		Day day = {
 			date: parseDate(pn.header),
 			items: pn.items.map!(pni => Item(pni.name, pni.value)).array,
@@ -44,49 +42,9 @@ void printDay(Day d)
 auto getDb(string fileName)
 {
 	Record[] db;
-	// auto collector = ;
 	parseFileName(fileName, (ParsedNode pn) {
 		db ~= Record(pn.header, pn.items.map!(pni=>Ingredient(pni.name, pni.value)).array, pn.meta);
 		return false;
 	});
-	// Record[] db = [
-	// 	{
-	// 		name: "soup/potato/100g",
-	// 		ingredients: [
-	// 			Ingredient("soup/potato/meal", 0.01),
-	// 		],
-	// 		meta: [],
-	// 	},
-	// 	{
-	// 		name: "soup/potato/meal",
-	// 		ingredients: [
-	// 			Ingredient("vegetables/potato/100g", 3),
-	// 			Ingredient("oil/sunflower/100g", 0.30),
-	// 		],
-	// 		meta: [],
-	// 	},
-	// 	{
-	// 		name: "vegetables/potato/100g",
-	// 		ingredients: [
-	// 			Ingredient("kcal", 77),
-	// 			Ingredient("fat", 0.1),
-	// 			Ingredient("carbs", 17),
-	// 			Ingredient("protein", 2),
-	// 		],
-	// 		meta: [MetaPair("version", "v1")]
-	// 	}
-	// ];
 	return db;
-}
-
-auto getJournal()
-{
-	Day[] journal = [
-		{
-			date: Date(2018, 1, 1),
-			items: [Item("vegetables/potato/100g", 2.00)],
-			meta: [MetaPair("version", "v1")]
-		}
-	];
-	return journal;
 }

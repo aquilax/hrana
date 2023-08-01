@@ -16,10 +16,14 @@ int runCommandLine(string[] args)
 	auto a = new Program("hran", "1.0")
 		.summary("A command line tool to keep log of diet and exercise in text files")
 		.author("aquilax aquilax@gmail.com>")
+		.add(new Option("d", null, "database file path").name("database"))
+		.add(new Option("l", null, "journal file path").name("log"))
+
 		.add(new Command("reg"))
 		.parse(args);
 
 	a.on("reg", (args) {
+		writeln();
 		auto config = configFromArgs(args);
 		commandReg(config);
 	});
@@ -29,5 +33,9 @@ int runCommandLine(string[] args)
 
 auto configFromArgs(ProgramArgs args)
 {
-	return Config();
+	Config c = {
+		databaseFileName: args.option("database"),
+		journalFileName: args.option("log"),
+	};
+	return c;
 }
