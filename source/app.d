@@ -1,7 +1,8 @@
 module app;
 
-import cmd.commandline;
 import std.stdio;
+
+import cmd.commandline;
 
 int main(string[] args)
 {

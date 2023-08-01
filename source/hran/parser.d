@@ -1,10 +1,11 @@
 module hran.parser;
 
-import std.stdio;
-import std.string;
-import hran.meta;
 import std.algorithm;
 import std.conv;
+import std.stdio;
+import std.string;
+
+import hran.meta;
 
 enum CommentChar = '#';
 

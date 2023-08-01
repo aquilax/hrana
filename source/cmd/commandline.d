@@ -1,13 +1,15 @@
 module cmd.commandline;
 
-import std.stdio;
-import hran.journal;
-import hran.database;
-import hran.meta;
-import std.datetime.date : DateTime;
-import commandr;
-import cmd.config;
 import cmd.commands.reg;
+import cmd.config;
+import std.datetime.date : DateTime;
+import std.stdio;
+
+import commandr;
+
+import hran.database;
+import hran.journal;
+import hran.meta;
 
 int runCommandLine(string[] args)
 {

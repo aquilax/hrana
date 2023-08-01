@@ -1,16 +1,16 @@
 module cmd.commands.reg;
 
 import cmd.config;
-import hran.journal;
+import std.algorithm;
+import std.array;
+import std.datetime;
+import std.stdio;
+
 import hran.database;
+import hran.journal;
 import hran.meta;
 import hran.parser;
 import hran.utils;
-import std.stdio;
-import std.datetime;
-import std.algorithm;
-import std.array;
-
 
 int commandReg(Config c)
 {

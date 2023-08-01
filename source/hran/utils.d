@@ -1,10 +1,10 @@
 module hran.utils;
 
-import std.stdio;
 import std.array;
 import std.conv;
 import std.datetime.date : Date;
 import std.format;
+import std.stdio;
 
 T[] reduceItems(T)(T[] input) pure nothrow
 {

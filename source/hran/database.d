@@ -1,10 +1,11 @@
 module hran.database;
 
-import std.functional;
-import std.stdio;
 import std.algorithm;
 import std.array;
+import std.functional;
 import std.range;
+import std.stdio;
+
 import hran.meta;
 import hran.utils;
 

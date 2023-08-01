@@ -1,10 +1,11 @@
 module hran.journal;
 
-import std.datetime.date : Date;
-import hran.meta;
-import hran.database;
 import std.algorithm;
 import std.array;
+import std.datetime.date : Date;
+
+import hran.database;
+import hran.meta;
 import hran.utils;
 
 struct Item
