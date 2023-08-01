@@ -51,23 +51,13 @@ void parseFile(File file, bool delegate(ParsedNode pn) callback) {
 
 		if (node.header != "") {
 			if (trimmedLine[0] == CommentChar) {
-				// // Metadata
-				// mp, _ = getMetadataPair(trimmedLine)
-				// if mp != nil {
-				// 	if node.Metadata == nil {
-				// 		node.Metadata = &shared.Metadata{*mp}
-				// 	} else {
-				// 		*node.Metadata = append(*node.Metadata, *mp)
-				// 	}
-				// }
+				// Metadata
+				node.meta ~= getMetadataPair(trimmedLine);
 				continue;
 			}
 			auto separatorPos = lastIndexOfAny(trimmedLine, "\t ");
 			if (separatorPos == -1) {
-				// if stop, err := callback(nil, NewErrorBadSyntax(lineNumber, line)); stop {
-				// 	return err
-				// }
-				continue;
+				throw new InvalidItemException("invalid item row", lineNumber);
 			}
 			string title = trimmedLine[0..separatorPos].stripRight(": \t");
 
@@ -81,4 +71,28 @@ void parseFile(File file, bool delegate(ParsedNode pn) callback) {
 	if (node.header != "") {
 		callback(node);
 	}
+}
+
+MetaPair getMetadataPair(string line)
+{
+	auto trimmedLine = line.stripLeft("# \t");
+	auto separatorPos = indexOf(trimmedLine, ":");
+	if (separatorPos > -1) {
+		return MetaPair(
+			trimmedLine[0..separatorPos],
+			trimmedLine[separatorPos+1..$].strip
+		);
+	}
+	return MetaPair("", trimmedLine);
+}
+
+
+class InvalidItemException : Exception
+{
+	int lineNumber;
+
+    this(string msg, int lineNumber, string file = __FILE__, size_t line = __LINE__) {
+        super(msg,  file, line);
+		this.lineNumber = lineNumber;
+    }
 }
