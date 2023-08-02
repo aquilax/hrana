@@ -26,7 +26,7 @@ struct Record
 
 Record[] resolveDatabase(Record[] db) nothrow
 {
-	return map!(r => resolveRecord(r, db, MaxDepth))(db).array;
+	return db.map!(r => resolveRecord(r, db, MaxDepth)).array;
 }
 
 Record resolveRecord(Record r, Record[] db,  int depth) nothrow
@@ -41,11 +41,11 @@ Record resolveRecord(Record r, Record[] db,  int depth) nothrow
 			if (index == -1) {
 				return [i];
 			}
-			return memoize!resolveRecord(db[index], db, depth-1).ingredients
+			return resolveRecord(db[index], db, depth-1).ingredients
 				.map!(fi=> Ingredient(fi.name, fi.value * i.value)).array;
 	};
 
-	auto i = joiner(r.ingredients.map!(getIngredients)).array;
+	auto i = joiner(r.ingredients.map!(memoize!(getIngredients))).array;
 
 	Record ret = {
 		name: r.name,
